@@ -3,6 +3,7 @@ package com.saytech.expentrack.userservice.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "users")
@@ -22,6 +23,17 @@ public class User {
     @NotBlank
     private String password;
 
+    @Column(name = "created_at", updatable = false)
+    private LocalDateTime createdAt;
+
+    @Column(name = "updated_at")
+    private LocalDateTime updatedAt;
+
+    public User() {
+        this.createdAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
+    }
+
     public Long getId() {
         return id;
     }
@@ -36,6 +48,7 @@ public class User {
 
     public void setUsername(String username) {
         this.username = username;
+        this.updatedAt = LocalDateTime.now(); // Update timestamp on modification
     }
 
     public String getEmail() {
@@ -44,6 +57,7 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+        this.updatedAt = LocalDateTime.now(); // Update timestamp on modification
     }
 
     public String getPassword() {
@@ -52,5 +66,14 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+        this.updatedAt = LocalDateTime.now(); // Update timestamp on modification
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
     }
 }

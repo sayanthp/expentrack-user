@@ -7,15 +7,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Configuration
 public class AppConfigurations {
-
     @Bean
     public BCryptPasswordEncoder encoder() {
         return new BCryptPasswordEncoder();
-    }
-
-    @Bean
-    public UserService userService() {
-        return new UserService();
     }
 
 }
